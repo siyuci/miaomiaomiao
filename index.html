@@ -190,46 +190,47 @@
         const DIM_PAIRS = [
             { leftKey: 'EI', leftLabel: '内倾', rightLabel: '外倾' },
             { leftKey: 'SN', leftLabel: '实感', rightLabel: '直觉' },
-            { leftKey: 'TF', leftLabel: '情感', rightLabel: '逻辑' },
+            { leftKey: 'TF', leftLabel: '情感', rightLabel: '思考' },
             { leftKey: 'JP', leftLabel: '知觉', rightLabel: '判断' }
         ];
 
+        // 人物索引：0勾践 1夫差 2伍子胥 3范蠡 4文种 5伯嚭 6西施/郑旦
         const CHARACTERS = [
             {
                 name: "勾践",
                 bio: "越王允常之子。先杀吴王阖闾，三年后不敌继任者夫差，退守会稽，获文种之策贿吴太宰嚭，以得吴王之释。后苦身焦思，用诸大夫之策，经二十余年积累，终灭吴。",
                 personality: "二十年江南二十年淮北，莫欺少年穷。",
-                vec: [60, 65, 65, 25]
+                vec: [70, 70, 70, 20]
             },
             {
                 name: "夫差",
                 bio: "吴王阖闾之子。阖闾伐越因伤而死，夫差立志报仇，三年后大败越军，围勾践于会稽山，却因听信谗言许越求和，后一心北上争霸。公元前482年黄池会盟，越军趁虚袭吴，入姑苏，杀太子，此后吴国连年败退。公元前473年，战败城破，夫差自杀。",
                 personality: "相父，那个叔叔他送我棒棒糖了，他是好蛋，你不可以这么说他！",
-                vec: [60, 65, 35, 55]
+                vec: [70, 70, 30, 60]
             },
             {
                 name: "伍子胥",
                 bio: "名员，字子胥，楚国人。父兄被平王所杀，伍子胥辗转入吴，助阖闾夺位。越求和时力谏“今不灭越，后必悔之”，吴王不听。后谏吴王勿伐齐，又不听，渐被疏远。后获夫差赐属镂之剑，遂自杀。",
                 personality: "邻居亲朋不要比，儿孙琐事随它去；享福到老不容易，是否更该去珍惜？",
-                vec: [60, 35, 75, 75]
+                vec: [70, 30, 80, 80]
             },
             {
                 name: "范蠡",
                 bio: "字少伯，楚国宛人。入越事勾践，后官拜相国。辅佐勾践图强，主掌军事与土木工程（x，灭吴战间官至上将军。吴亡后，范蠡认为勾践“可与共患难，不可与共乐”，遂离去，浮海至齐，更名从商，后定居于陶，世称陶朱公。",
                 personality: "豪中之豪，但我相信你真的看得懂美联储议息会议。",
-                vec: [40, 75, 75, 35]
+                vec: [30, 80, 80, 30]
             },
             {
                 name: "文种",
                 bio: "字子禽（一说少禽），楚国郢人。先为楚宛令，后与范蠡一同奔越，为大夫。与范蠡共同辅佐勾践，主掌内政与阴谋。吴亡后，范蠡浮舟离越，自齐遗书劝其同去，未果。后得勾践赐剑，命其自刎，以殡先王。",
                 personality: "随风潜入……对了，说到夜，经常杀人的朋友们都知道……",
-                vec: [60, 35, 35, 65]
+                vec: [65, 30, 35, 75]
             },
             {
                 name: "伯嚭",
                 bio: "楚国人，因楚内乱奔吴，得任太宰。夫椒之战败退后，越国派文种携美女宝器以贿伯嚭，其受贿后劝夫差许越求和，更于此后屡进谗言排挤伍子胥。吴亡后，被越国所诛。",
                 personality: "今朝有酒今朝醉，明日愁来明日愁。",
-                vec: [45, 35, 65, 25]
+                vec: [45, 45, 65, 25]
             },
             {
                 name: "西施 / 郑旦",
@@ -243,232 +244,231 @@
             {
                 text: "你排了很久的队，终于快到你了，结果旁边突然插进来一个人。你——",
                 options: [
-                    { text: "直接大声说：麻烦排队。", charIdx: 2, mods: { TF: 5, EI: 5 } },
-                    { text: "瞪他。看他好不好意思。", charIdx: 1, mods: { EI: 5, SN: 5, TF: -5 } },
-                    { text: "算了。多一个不多。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "不吭声。但心里已经骂了他八百遍。", charIdx: 5, mods: { JP: -5, TF: -5 } }
+                    { text: "直接大声说：麻烦排队。", link: 1, mods: { TF: 3, EI: 3 } },
+                    { text: "瞪他。看他好不好意思。", link: 2, mods: { EI: -3, TF: -3 } },
+                    { text: "算了。多一个不多。", link: 6, mods: { TF: -3, JP: -3 } },
+                    { text: "不吭声。但心里已经骂了他八百遍。", link: 5, mods: { EI: -3, TF: -3 } }
                 ]
             },
             {
                 text: "你在网上看到一个课程，宣传说“零基础也能月入过万”。你——",
                 options: [
-                    { text: "立刻报名。万一真能赚呢。", charIdx: 1, mods: { SN: 5, EI: 5, TF: -5 } },
-                    { text: "先看看有没有人上过。评价怎么样。", charIdx: 3, mods: { SN: 5, TF: 5 } },
-                    { text: "划走。这种一看就是割韭菜。", charIdx: 2, mods: { TF: 5, SN: -5 } },
-                    { text: "收藏了。以后再说。", charIdx: 5, mods: { JP: -5, SN: -5 } }
+                    { text: "立刻报名。万一真能赚呢。", link: 1, mods: { SN: 3, EI: 3, TF: -3 } },
+                    { text: "先看看有没有人上过。评价怎么样。", link: 4, mods: { SN: 3, TF: 3 } },
+                    { text: "划走。这种一看就是割韭菜。", link: 2, mods: { TF: 3, SN: -3 } },
+                    { text: "收藏了。以后再说。", link: 5, mods: { JP: -3, SN: -3 } }
                 ]
             },
             {
                 text: "你朋友跟你说他准备辞职去开一家店，启动资金是借的。你——",
                 options: [
-                    { text: "支持他。有梦想就去追。", charIdx: 1, mods: { SN: 5, TF: -5, EI: 5 } },
-                    { text: "问他：你算过多久能回本吗？", charIdx: 3, mods: { TF: 5, SN: 5, JP: 5 } },
-                    { text: "说挺好的。但心里觉得他迟早赔。", charIdx: 5, mods: { JP: -5, TF: -5, SN: -5 } },
-                    { text: "劝他再想想。风险太大了。", charIdx: 2, mods: { TF: 5, JP: 5, SN: -5 } }
+                    { text: "支持他。有梦想就去追。", link: 1, mods: { SN: 3, TF: -3, EI: 3 } },
+                    { text: "问他：你算过多久能回本吗？", link: 3, mods: { TF: 3, SN: -3, JP: 3 } },
+                    { text: "说挺好的。但心里觉得他迟早赔。", link: 5, mods: { JP: -3, TF: -3, EI: -3 } },
+                    { text: "劝他再想想。风险太大了。", link: 4, mods: { TF: 3, JP: 3, SN: -3 } }
                 ]
             },
             {
                 text: "你在群里发了一条消息，半天没人回。你——",
                 options: [
-                    { text: "再发一条。或者直接@人。", charIdx: 0, mods: { EI: 5, TF: 5, JP: 5 } },
-                    { text: "不发了。等他们想起来再说。", charIdx: 6, mods: { EI: -5, JP: -5 } },
-                    { text: "看看是不是自己说错话了。", charIdx: 4, mods: { TF: -5, JP: 5, EI: -5 } },
-                    { text: "私聊问其中一个人：群里怎么没人说话？", charIdx: 3, mods: { EI: -5, TF: 5, JP: 5 } }
+                    { text: "再发一条。或者直接@人。", link: 1, mods: { EI: 3, TF: 3 } },
+                    { text: "不发了。等他们想起来再说。", link: 6, mods: { EI: -3, JP: -3 } },
+                    { text: "看看是不是自己说错话了。", link: 4, mods: { TF: -3, EI: -3 } },
+                    { text: "私聊问其中一个人：群里怎么没人说话？", link: 0, mods: { EI: -3, TF: 3, JP: 3 } }
                 ]
             },
             {
                 text: "你同事在办公室抱怨领导不公平，说得很大声。你——",
                 options: [
-                    { text: "跟着一起吐槽。确实不公平。", charIdx: 0, mods: { EI: 5, TF: -5, JP: -5 } },
-                    { text: "不接话。低头做自己的事。", charIdx: 6, mods: { EI: -5, TF: -5 } },
-                    { text: "私下跟他说：你小声点。被听到不好。", charIdx: 4, mods: { TF: 5, JP: 5, EI: -5 } },
-                    { text: "直接说：你觉得不公平，你去找领导说啊。", charIdx: 2, mods: { TF: 5, EI: 5, JP: 5 } }
+                    { text: "跟着一起吐槽。确实不公平。", link: 1, mods: { EI: 3, TF: -3 } },
+                    { text: "不接话。低头做自己的事。", link: 6, mods: { EI: -3, TF: -3 } },
+                    { text: "私下跟他说：你小声点。被听到不好。", link: 4, mods: { TF: 3, JP: 3, EI: -3 } },
+                    { text: "直接说：你觉得不公平，你去找领导说啊。", link: 0, mods: { TF: 3, EI: 3, JP: 3 } }
                 ]
             },
             {
                 text: "你买了一件衣服，穿了一次就起球了。你——",
                 options: [
-                    { text: "找商家退货。质量太差了。", charIdx: 2, mods: { TF: 5, EI: 5, JP: 5 } },
-                    { text: "算了。几十块钱的东西。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "问问能不能换一件。", charIdx: 4, mods: { TF: -5, JP: 5, EI: -5 } },
-                    { text: "拍照发差评。让大家都看看。", charIdx: 0, mods: { EI: 5, TF: 5, JP: 5 } }
-                ]
-            },
-            {
-                text: "你朋友跟你说他最近在做一个项目，听起来不太靠谱，但他很兴奋。你——",
-                options: [
-                    { text: "说挺好的。他高兴就行。", charIdx: 6, mods: { TF: -5, EI: -5, JP: -5 } },
-                    { text: "把你觉得不靠谱的地方说清楚。", charIdx: 2, mods: { TF: 5, SN: 5 } },
-                    { text: "问他：你打算怎么落地？", charIdx: 3, mods: { TF: 5, SN: 5, JP: 5 } },
-                    { text: "嘴上说好。心里觉得他会被坑。", charIdx: 5, mods: { JP: -5, TF: -5, SN: -5 } }
+                    { text: "找商家退货。质量太差了。", link: 2, mods: { TF: 3, EI: 3, JP: 3 } },
+                    { text: "算了。几十块钱的东西。", link: 6, mods: { TF: -3, JP: -3 } },
+                    { text: "问问能不能换一件。", link: 4, mods: { TF: 3, JP: 3, EI: -3 } },
+                    { text: "拍照发差评。让大家都看看。", link: 1, mods: { EI: -3, TF: -3, JP: -3 } }
                 ]
             },
             {
                 text: "你发现自己被拉进一个购物群，群主每天发几十条广告。你——",
                 options: [
-                    { text: "退群。太烦了。", charIdx: 2, mods: { TF: 5, EI: -5, JP: 5 } },
-                    { text: "免打扰。放着不管。", charIdx: 6, mods: { EI: -5, JP: -5 } },
-                    { text: "看看有没有便宜的。有就买。", charIdx: 5, mods: { SN: -5, JP: -5, TF: -5 } },
-                    { text: "在群里说一句：能不能少发点。", charIdx: 0, mods: { EI: 5, TF: 5 } }
-                ]
-            },
-            {
-                text: "你朋友跟你借钱，说下周还。你手头刚好有一笔闲钱。你——",
-                options: [
-                    { text: "借。朋友开口了。", charIdx: 6, mods: { TF: -5, EI: -5 } },
-                    { text: "借。但说清楚下周几还。", charIdx: 3, mods: { TF: 5, JP: 5, EI: -5 } },
-                    { text: "不借。借钱伤感情。", charIdx: 2, mods: { TF: 5, EI: -5, JP: 5 } },
-                    { text: "借一半。说自己也有用。", charIdx: 5, mods: { JP: -5, TF: -5 } }
-                ]
-            },
-            {
-                text: "你正在忙，一个不太熟的同事过来找你聊天。你——",
-                options: [
-                    { text: "停下来陪他聊几句。", charIdx: 6, mods: { TF: -5, EI: -5, JP: -5 } },
-                    { text: "一边忙一边应付两句。", charIdx: 5, mods: { JP: -5, EI: 5, TF: -5 } },
-                    { text: "直接说：我现在有点忙，回头聊。", charIdx: 2, mods: { TF: 5, EI: 5 } },
-                    { text: "问他：有什么事吗？", charIdx: 3, mods: { TF: 5, SN: 5 } }
+                    { text: "退群。太烦了。", link: 2, mods: { TF: -3, EI: -3, JP: 3 } },
+                    { text: "免打扰。放着不管。", link: 6, mods: { EI: -3, JP: -3 } },
+                    { text: "看看有没有便宜的。有就买。", link: 5, mods: { SN: -3, JP: -3, TF: -3 } },
+                    { text: "在群里说一句：能不能少发点。", link: 1, mods: { EI: 3, TF: 3 } }
                 ]
             },
             {
                 text: "你在超市看到一样你从没吃过的东西，正在打折。你——",
                 options: [
-                    { text: "买一个试试。又不贵。", charIdx: 1, mods: { SN: 5, EI: 5, JP: -5 } },
-                    { text: "看看配料表。再决定。", charIdx: 4, mods: { TF: 5, SN: -5, JP: 5 } },
-                    { text: "不买。万一不好吃浪费。", charIdx: 0, mods: { TF: 5, JP: 5, SN: -5 } },
-                    { text: "拍个照。先查查再说。", charIdx: 3, mods: { TF: 5, JP: 5, EI: -5 } }
-                ]
-            },
-            {
-                text: "你同事升职了，请全组喝奶茶。你心里有点酸。你——",
-                options: [
-                    { text: "点一杯。说恭喜。", charIdx: 6, mods: { TF: -5, EI: -5, JP: -5 } },
-                    { text: "点一杯。然后问问升职有什么经验。", charIdx: 3, mods: { TF: 5, JP: 5, EI: -5 } },
-                    { text: "不点。说自己不喝奶茶。", charIdx: 2, mods: { TF: 5, EI: 5 } },
-                    { text: "点一杯。回头想想自己差在哪。", charIdx: 4, mods: { TF: 5, JP: 5, EI: -5 } }
-                ]
-            },
-            {
-                text: "你到公司发现昨天忘了关空调，开了一整夜。你——",
-                options: [
-                    { text: "关了就行。没人发现就算了。", charIdx: 5, mods: { JP: -5, TF: -5 } },
-                    { text: "跟同事说一声。下次注意。", charIdx: 4, mods: { TF: -5, JP: 5, EI: -5 } },
-                    { text: "不说了。反正也没人知道。", charIdx: 6, mods: { EI: -5, JP: -5 } },
-                    { text: "看看有没有人被影响到。有的话道个歉。", charIdx: 3, mods: { TF: 5, EI: -5, JP: 5 } }
-                ]
-            },
-            {
-                text: "你朋友在朋友圈发了一条很长的负能量状态。你——",
-                options: [
-                    { text: "私聊问一句：还好吗？", charIdx: 3, mods: { EI: -5, TF: 5, SN: 5 } },
-                    { text: "点个赞。表示我看到了。", charIdx: 6, mods: { EI: -5, TF: -5, JP: -5 } },
-                    { text: "不评论。这种事不好掺和。", charIdx: 2, mods: { TF: 5, EI: -5 } },
-                    { text: "评论一句：怎么了？", charIdx: 5, mods: { JP: -5, TF: -5, EI: 5 } }
+                    { text: "买一个试试。又不贵。", link: 1, mods: { SN: 3, EI: 3, JP: -3 } },
+                    { text: "看看配料表。再决定。", link: 3, mods: { TF: 3, SN: -3, JP: 3 } },
+                    { text: "不买。万一不好吃浪费。", link: 2, mods: { TF: 3, JP: 3, SN: -3 } },
+                    { text: "拍个照。先查查再说。", link: 4, mods: { JP: 3, TF: -3, EI: -3 } }
                 ]
             },
             {
                 text: "你在家做饭，发现盐用完了。菜已经下锅了。你——",
                 options: [
-                    { text: "下楼买。不能让菜毁了。", charIdx: 1, mods: { EI: 5, SN: 5, JP: -5 } },
-                    { text: "不放了。凑合吃。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "看看有没有别的调料能顶一下。", charIdx: 4, mods: { TF: 5, SN: -5, JP: 5 } },
-                    { text: "把菜倒了。重做。", charIdx: 0, mods: { EI: 5, TF: 5, JP: -5 } }
+                    { text: "下楼买。不能让菜毁了。", link: 4, mods: { EI: 3, SN: -3, JP: -3 } },
+                    { text: "不放了。凑合吃。", link: 6, mods: { TF: -3, JP: -3 } },
+                    { text: "看看有没有别的调料能顶一下。", link: 3, mods: { TF: 3, SN: -3, JP: 3 } },
+                    { text: "把菜倒了。重做。", link: 0, mods: { EI: 3, TF: 3, JP: -3 } }
                 ]
             },
             {
-                text: "你朋友跟你说，他最近在学一个新东西，学得特别快。你——",
+                text: "你正在忙，一个不太熟的同事过来找你聊天。你——",
                 options: [
-                    { text: "替他高兴，说“厉害”。", charIdx: 6, mods: { TF: -5, EI: -5, JP: -5 } },
-                    { text: "问他怎么学的，有没有方法。", charIdx: 3, mods: { TF: 5, SN: 5, JP: 5 } },
-                    { text: "说“那你挺有天赋的”。", charIdx: 1, mods: { EI: 5, SN: 5, TF: 5 } },
-                    { text: "说“那你教教我呗”。", charIdx: 5, mods: { JP: -5, EI: 5, TF: -5 } }
+                    { text: "停下来陪他聊几句。", link: 6, mods: { TF: -3, EI: -3, JP: -3 } },
+                    { text: "一边忙一边应付两句。", link: 5, mods: { JP: -3, EI: 3, TF: -3 } },
+                    { text: "直接说：我现在有点忙，回头聊。", link: 2, mods: { TF: 3, EI: 3 } },
+                    { text: "问他：有什么事吗？", link: 4, mods: { TF: 3, JP: 3 } }
                 ]
             },
             {
                 text: "你正在做一件重要的事，手机一直弹消息。你——",
                 options: [
-                    { text: "开飞行模式。做完再说。", charIdx: 4, mods: { TF: 5, JP: 5, SN: -5 } },
-                    { text: "看一眼。重要的就回。", charIdx: 3, mods: { TF: 5, JP: 5, EI: -5 } },
-                    { text: "不管。响就响吧。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "回。万一有人找我有急事。", charIdx: 0, mods: { EI: 5, TF: 5, JP: -5 } }
-                ]
-            },
-            {
-                text: "你朋友让你帮他选一张照片发朋友圈，两张照片差别不大。你——",
-                options: [
-                    { text: "随便选一张。都行。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "认真对比，选一张更好的。", charIdx: 4, mods: { TF: 5, SN: -5, JP: 5 } },
-                    { text: "选一张，然后说“其实两张差不多”。", charIdx: 3, mods: { TF: 5, EI: -5, JP: 5 } },
-                    { text: "选一张，然后说“发那张显得你瘦”。", charIdx: 5, mods: { EI: 5, TF: -5, JP: -5 } }
+                    { text: "开飞行模式。做完再说。", link: 1, mods: { TF: 3, JP: 3, SN: -3 } },
+                    { text: "看一眼。重要的就回。", link: 3, mods: { TF: 3, JP: 3, EI: -3 } },
+                    { text: "不管。响就响吧。", link: 0, mods: { TF: -3, JP: -3 } },
+                    { text: "回。万一有人找我有急事。", link: 4, mods: { EI: 3, TF: -3, JP: -3 } }
                 ]
             },
             {
                 text: "你看到一个“30天改变自己”的挑战，需要每天打卡。你——",
                 options: [
-                    { text: "参加。马上报名。", charIdx: 1, mods: { SN: 5, EI: 5, JP: -5 } },
-                    { text: "看看有没有人一起。有人一起就参加。", charIdx: 6, mods: { TF: -5, EI: -5, JP: -5 } },
-                    { text: "收藏了。以后再说。", charIdx: 5, mods: { JP: -5, SN: -5 } },
-                    { text: "不参加。这种多半坚持不下来。", charIdx: 2, mods: { TF: 5, SN: -5, JP: 5 } }
+                    { text: "参加。马上报名。", link: 1, mods: { SN: 3, EI: 3, JP: -3 } },
+                    { text: "看看有没有人一起。有人一起就参加。", link: 6, mods: { TF: -3, EI: -3, JP: -3 } },
+                    { text: "收藏了。万一有用。", link: 4, mods: { JP: 3, SN: -3 } },
+                    { text: "不参加。这种多半坚持不下来。", link: 2, mods: { TF: 3, SN: -3, JP: 3 } }
                 ]
             },
             {
                 text: "你在排队买早餐，前面的人买了很久，队伍一直不动。你——",
                 options: [
-                    { text: "继续等。反正也快了。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "换一家。不在这耗了。", charIdx: 1, mods: { EI: 5, SN: 5, JP: -5 } },
-                    { text: "看看前面到底怎么回事。", charIdx: 3, mods: { TF: 5, SN: 5 } },
-                    { text: "催一下。问问能不能快点。", charIdx: 2, mods: { TF: 5, EI: 5 } }
+                    { text: "继续等。反正也快了。", link: 1, mods: { TF: -3, JP: -3 } },
+                    { text: "换一家。不在这耗了。", link: 3, mods: { EI: 3, SN: -3, JP: -3 } },
+                    { text: "看看前面到底怎么回事。", link: 4, mods: { TF: 3, SN: -3 } },
+                    { text: "催一下。问问能不能快点。", link: 2, mods: { TF: 3, EI: 3 } }
                 ]
             },
             {
                 text: "如果让你用一种状态形容你最近的日子，你会选——",
                 options: [
-                    { text: "在攒。攒钱攒劲攒本事。", charIdx: 4, mods: { TF: 5, JP: 5, SN: -5 } },
-                    { text: "在冲。停不下来。", charIdx: 1, mods: { EI: 5, SN: 5, JP: -5 } },
-                    { text: "在耗。没什么特别想干的。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "在撑。每天都是硬扛。", charIdx: 0, mods: { EI: 5, TF: 5, JP: -5 } }
+                    { text: "在攒。攒钱攒劲攒本事。", link: 3, mods: { TF: 3, JP: 3, SN: -3 } },
+                    { text: "在冲。停不下来。", link: 1, mods: { EI: 3, SN: 3, JP: -3 } },
+                    { text: "在耗。没什么特别想干的。", link: 5, mods: { TF: -3, JP: -3 } },
+                    { text: "在撑。每天都是硬扛。", link: 0, mods: { EI: -3, TF: 3, JP: 3 } }
                 ]
             },
             {
                 text: "你在网上买的水果，收到发现有一半是坏的。你——",
                 options: [
-                    { text: "拍照找客服。要求退款。", charIdx: 2, mods: { TF: 5, EI: 5, JP: 5 } },
-                    { text: "给个无言差评。当避雷了。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "看看坏的程度。先跟卖家沟通。", charIdx: 3, mods: { TF: 5, SN: 5, JP: 5 } },
-                    { text: "默默记一笔。以后不在这家买了。", charIdx: 0, mods: { EI: 5, TF: 5, JP: -5 } }
-                ]
-            },
-            {
-                text: "你朋友临时约你晚上吃饭，你本来打算在家休息。你——",
-                options: [
-                    { text: "去。朋友约了就去。", charIdx: 6, mods: { TF: -5, EI: -5, JP: -5 } },
-                    { text: "不去。今天想自己待着。", charIdx: 3, mods: { EI: -5, TF: 5, JP: 5 } },
-                    { text: "看情况。太累了就不去。", charIdx: 5, mods: { JP: -5, TF: -5, EI: 5 } },
-                    { text: "去。但说好早点散。", charIdx: 4, mods: { TF: 5, JP: 5, EI: -5 } }
+                    { text: "拍照找客服。要求退款。", link: 0, mods: { TF: 3, EI: 3, JP: 3 } },
+                    { text: "给个无言差评。当避雷了。", link: 3, mods: { TF: -3, JP: 3 } },
+                    { text: "看看坏的程度。先跟卖家沟通。", link: 6, mods: { TF: 3, SN: -3, JP: 3 } },
+                    { text: "默默记一笔。以后不在这家买了。", link: 4, mods: { EI: -3, TF: 3, JP: 3 } }
                 ]
             },
             {
                 text: "你正在减肥，同事递过来一块蛋糕。你——",
                 options: [
-                    { text: "接。明天再减。", charIdx: 5, mods: { JP: -5, SN: -5, TF: -5 } },
-                    { text: "不接。说了减就得减。", charIdx: 2, mods: { TF: 5, EI: 5, JP: 5 } },
-                    { text: "接一小块。尝尝就行。", charIdx: 4, mods: { TF: 5, SN: -5, JP: 5 } },
-                    { text: "接。然后分一半给旁边的人。", charIdx: 0, mods: { EI: 5, TF: 5, JP: -5 } }
+                    { text: "接。明天再减。", link: 5, mods: { JP: -3, SN: -3, TF: -3, EI: 3 } },
+                    { text: "不接。说了减就得减。", link: 2, mods: { TF: 3, EI: 3, JP: 3 } },
+                    { text: "接一小块。尝尝就行。", link: 4, mods: { TF: 3, SN: -3, JP: 3 } },
+                    { text: "接。然后分一半给旁边的人。", link: 3, mods: { EI: 3, TF: -3, JP: -3 } }
                 ]
             },
             {
                 text: "你发现自己的快递被放到了很远的驿站，还下着雨。你——",
                 options: [
-                    { text: "打电话让快递员送上门。", charIdx: 2, mods: { TF: 5, EI: 5, JP: 5 } },
-                    { text: "算了。雨停了再去拿。", charIdx: 6, mods: { TF: -5, JP: -5 } },
-                    { text: "看看有没有别人能顺路帮我拿。", charIdx: 3, mods: { TF: 5, SN: 5, JP: 5 } },
-                    { text: "直接去拿。懒得扯皮。", charIdx: 0, mods: { EI: 5, TF: 5, JP: -5 } }
+                    { text: "打电话让快递员送上门。", link: 1, mods: { TF: 3, EI: 3, JP: 3 } },
+                    { text: "算了。雨停了再去拿。", link: 6, mods: { TF: -3, JP: -3 } },
+                    { text: "看看有没有别人能顺路帮我拿。", link: 4, mods: { TF: 3, SN: -3, JP: 3 } },
+                    { text: "直接去拿。懒得扯皮。", link: 3, mods: { EI: 3, TF: 3, JP: -3 } }
+                ]
+            },
+            {
+                text: "你发现同事在背后跟领导说了你一句不太好的话。你——",
+                options: [
+                    { text: "直接当面问他：你是不是跟领导说什么了？", link: 1, mods: { TF: 3, EI: 3 } },
+                    { text: "不问了。但以后跟他保持距离。", link: 2, mods: { EI: -3, TF: 3, JP: 3 } },
+                    { text: "找个机会也在领导面前说他两句。", link: 5, mods: { EI: 3, TF: -3, JP: -3 } },
+                    { text: "装作不知道。该怎么样还怎么样。", link: 6, mods: { TF: -3, JP: -3 } }
+                ]
+            },
+            {
+                text: "你手上有一个机会，但需要你放下身段去求一个你不太看得上的人。你——",
+                options: [
+                    { text: "去。面子不值钱，先把事办了。", link: 4, mods: { TF: 3, EI: -3, JP: 3 } },
+                    { text: "不去。拉不下这个脸。", link: 2, mods: { EI: 3, TF: -3 } },
+                    { text: "找个中间人搭线，自己不出面。", link: 0, mods: { EI: -3, TF: 3, JP: 3 } },
+                    { text: "先拖着。说不定这事自己就成了。", link: 1, mods: { JP: -3, SN: -3 } }
+                ]
+            },
+            {
+                text: "你朋友跟你借了一个东西，说用完就还。过了两周还没还。你——",
+                options: [
+                    { text: "再等等。可能他忘了。", link: 6, mods: { TF: -3, EI: -3 } },
+                    { text: "直接问他要。都两周了。", link: 2, mods: { TF: 3, EI: 3 } },
+                    { text: "发条消息：那个东西我用一下。", link: 3, mods: { TF: 3, EI: -3, JP: 3 } },
+                    { text: "不提了。下次不借了。", link: 4, mods: { EI: -3, TF: -3, JP: -3 } }
+                ]
+            },
+            {
+                text: "你朋友在朋友圈发了一条很长的负能量状态。你——",
+                options: [
+                    { text: "点个赞。表示我看到了。", link: 6, mods: { EI: -3, TF: -3, JP: -3 } },
+                    { text: "私聊问一句：还好吗？", link: 4, mods: { EI: -3, TF: -3, SN: 3 } },
+                    { text: "不评论。这种事不好掺和。", link: 5, mods: { TF: 3, EI: -3 } },
+                    { text: "评论一句：怎么了？", link: 3, mods: { EI: 3, TF: -3 } }
+                ]
+            },
+            {
+                text: "你朋友在群里发了一个红包，你抢到最少。你——",
+                options: [
+                    { text: "发个表情包，说谢谢老板。", link: 4, mods: { EI: 3, TF: -3, JP: -3 } },
+                    { text: "不说话，默默收了。", link: 6, mods: { EI: -3, TF: -3 } },
+                    { text: "跟着发一个红包出去。", link: 1, mods: { EI: 3, TF: -3 } },
+                    { text: "截图发朋友圈，说今天运气好。", link: 0, mods: { EI: 3, TF: 3, JP: -3 } }
+                ]
+            },
+            {
+                text: "你到公司发现昨天忘了关空调，开了一整夜。你——",
+                options: [
+                    { text: "关了就行。没人发现就算了。", link: 5, mods: { JP: -3, TF: -3 } },
+                    { text: "跟同事说一声。下次注意。", link: 3, mods: { TF: 3, JP: 3, EI: -3 } },
+                    { text: "不说了。反正也没人知道。", link: 0, mods: { EI: -3, JP: -3 } },
+                    { text: "看看有没有人被影响到。有的话道个歉。", link: 4, mods: { TF: 3, EI: -3, JP: 3 } }
+                ]
+            },
+            {
+                text: "你同事升职了，请全组喝奶茶。你心里有点酸。你——",
+                options: [
+                    { text: "点一杯。说恭喜。", link: 4, mods: { TF: -3, EI: -3, JP: -3 } },
+                    { text: "点一杯。然后问问升职有什么经验。", link: 3, mods: { TF: 3, JP: 3, EI: -3 } },
+                    { text: "不点。说自己不喝奶茶。", link: 1, mods: { TF: 3, EI: -3 } },
+                    { text: "点一杯。回头想想自己差在哪。", link: 5, mods: { TF: 3, JP: 3, EI: -3 } }
+                ]
+            },
+            {
+                text: "你打车，司机一直在绕路。你——",
+                options: [
+                    { text: "直接说：师傅，你绕路了吧。", link: 1, mods: { TF: 3, EI: 3 } },
+                    { text: "不说了。到了给个差评。", link: 3, mods: { EI: -3, TF: 3, JP: 3 } },
+                    { text: "可能人家有苦衷。算了。", link: 6, mods: { TF: -3, JP: -3 } },
+                    { text: "看导航。如果确实绕了就开口。", link: 2, mods: { TF: 3, SN: -3, JP: 3 } }
                 ]
             }
         ];
 
         const INIT_VAL = 50;
-        const MAX_DIFF = 400;
 
         let currentQ = 0;
         let answers = new Array(QUESTIONS.length).fill(null);
@@ -520,7 +520,7 @@
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
-                if (answers[currentQ] && answers[currentQ].charIdx === opt.charIdx) btn.classList.add('selected');
+                if (answers[currentQ] && answers[currentQ].charIdx === idx) btn.classList.add('selected');
                 const prefix = String.fromCharCode(65 + idx);
                 btn.innerHTML = `<span class="option-prefix">${prefix}</span><span>${opt.text}</span>`;
                 btn.addEventListener('click', () => {
@@ -528,7 +528,7 @@
                     if (answers[currentQ]) {
                         applyMods(answers[currentQ].mods, -1);
                     }
-                    answers[currentQ] = { charIdx: opt.charIdx, mods: opt.mods };
+                    answers[currentQ] = { charIdx: idx, mods: opt.mods, link: opt.link };
                     applyMods(opt.mods, 1);
                     document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
@@ -537,7 +537,7 @@
                             if (answers[currentQ]) {
                                 goToQuestion(currentQ + 1);
                             }
-                        }, 275);
+                        }, 250);
                     }
                 });
                 optionsList.appendChild(btn);
@@ -549,15 +549,42 @@
 
         function allAnswered() { return answers.every(a => a !== null); }
 
+        function getLibraryLinkCounts() {
+            const counts = new Array(CHARACTERS.length).fill(0);
+            QUESTIONS.forEach(q => {
+                q.options.forEach(opt => {
+                    if (opt.link !== undefined) counts[opt.link]++;
+                });
+            });
+            return counts;
+        }
+
         function getScores() {
-            const results = CHARACTERS.map((c, i) => {
-                let diffSum = 0;
+            const attrResults = CHARACTERS.map((c) => {
+                let weightedDiff = 0;
+                let maxWeightedDiff = 0;
                 for (let d = 0; d < 4; d++) {
-                    diffSum += Math.abs(dims[d] - c.vec[d]);
+                    const weight = 1 + Math.abs(c.vec[d] - 50) / 50;
+                    weightedDiff += Math.abs(dims[d] - c.vec[d]) * weight;
+                    maxWeightedDiff += 100 * weight;
                 }
-                const mismatchPercent = (diffSum / MAX_DIFF) * 100;
-                const percent = Math.round(100 - mismatchPercent);
-                return { idx: i, percent: Math.max(0, percent) };
+                const mismatchPercent = (weightedDiff / maxWeightedDiff) * 100;
+                return Math.max(0, Math.round(100 - mismatchPercent));
+            });
+
+            const libCounts = getLibraryLinkCounts();
+            const userCounts = new Array(CHARACTERS.length).fill(0);
+            answers.forEach(a => {
+                if (a && a.link !== undefined) userCounts[a.link]++;
+            });
+            const linkScores = CHARACTERS.map((c, i) => {
+                if (libCounts[i] === 0) return 0;
+                return Math.round((userCounts[i] / libCounts[i]) * 100);
+            });
+
+            const results = CHARACTERS.map((c, i) => {
+                const finalPercent = Math.round(attrResults[i] * 0.7 + linkScores[i] * 0.3);
+                return { idx: i, percent: Math.max(0, finalPercent) };
             });
             results.sort((a, b) => b.percent - a.percent);
             return results;
